@@ -11,6 +11,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="http://github.com/BravelyPeculiar/botw_duplicator_tools",
+    download_url="https://github.com/BravelyPeculiar/botw_duplicator_tools/archive/1.0.tar.gz",
     author="BravelyPeculiar",
     author_email="joshuawaltonm@gmail.com",
     license="MIT",
