@@ -1,7 +1,7 @@
 
 
 ## Installation
-Install Python 3.6+, then run `pip install botw_duplicator_tools`.
+Install Python 3.6+, then run `pip install botw-duplicator-tools`.
 
 ## Documentation
 ### actorinfo_tool
