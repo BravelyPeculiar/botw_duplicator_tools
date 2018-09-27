@@ -99,6 +99,7 @@ def actorinfo_add(actorinfo_data, new_entry_data):
 
 def main():
     global is_yaz0
+    global args
     
     parser = argparse.ArgumentParser()
     parser.add_argument("-b", "--be", help="Use big endian (for Wii U files)", action="store_true")
