@@ -3,7 +3,7 @@ import argparse
 
 import wszst_yaz0
 
-def main(args_in):
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("old_file_path", help="The path of the bfres/bitemico file you want to duplicate")
     parser.add_argument("new_file_path", help="The path for the duplicated bfres/bitemico - its name must be the same length as the original name")

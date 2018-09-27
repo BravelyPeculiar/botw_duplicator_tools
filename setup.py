@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="botw_duplicator_tools",
-    version="1.2",
+    version="1.3",
     description="Tools for duplicating actors and models, for modding the game 'The Legend of Zelda: Breath of the Wild'.",
     long_description=long_description,
     long_description_content_type="text/markdown",

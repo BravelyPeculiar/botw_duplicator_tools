@@ -1,5 +1,3 @@
-
-
 ## Installation
 Install Python 3.6+, then run `pip install botw-duplicator-tools`.
 
@@ -43,7 +41,7 @@ For correctly duplicating bfres files (also works on bitemico files). The name o
 
 (Simply copy-pasting the bfres/bitemico file won't make the required internal changes to the file).
 
-`bfres_duplicator.py OLD_FILE_PATH NEW_FILE_PATH`
+`bfres_duplicator OLD_FILE_PATH NEW_FILE_PATH`
 
 ## Guides
 #### To put a duplicate of an armor's model (and physics) over a different one:
