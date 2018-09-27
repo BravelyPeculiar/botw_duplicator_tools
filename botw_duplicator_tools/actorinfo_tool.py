@@ -7,6 +7,7 @@ from sys import argv
 
 import wszst_yaz0
 import byml
+import pprint
 
 def actorinfo_load(path):
     global is_yaz0
@@ -19,6 +20,7 @@ def actorinfo_load(path):
     return actorinfo_data
 
 def actorinfo_save(data, path):
+    
     if data:
         writer = byml.Writer(data, be=args.be, version=2)
         stream = io.BytesIO()
@@ -89,12 +91,18 @@ def actorinfo_duplicate(actorinfo_data, from_entry_name, to_entry_name):
     return actorinfo_data
 
 def actorinfo_add(actorinfo_data, new_entry_data):
-    actorlist = actorinfo_data["Actors"]
+    actorlist = [actor for actor in actorinfo_data["Actors"]]
     actorlist.append(new_entry_data)
-    hashlist = actorinfo_data["Hashes"]
-    hashlist.append(byml.UInt(binascii.crc32(new_entry_data["name"].encode()) & 0xffffffff))
+    hashlist = [int(hash) for hash in actorinfo_data["Hashes"]]
+    hashlist.append(int(binascii.crc32(new_entry_data["name"].encode()) & 0xffffffff))
     
-    hashlist, actorlist = (list(t) for t in zip(*sorted(zip(hashlist, actorlist))))
+    temp_list = zip(hashlist, actorlist)
+    temp_list_sorted = sorted(temp_list)
+    (new_hashlist, new_actorlist) = list(zip(*temp_list_sorted))
+    
+    actorinfo_data["Actors"] = [actor for actor in new_actorlist]
+    actorinfo_data["Hashes"] = [byml.UInt(hash) for hash in new_hashlist]
+    
     return actorinfo_data
 
 def main():
