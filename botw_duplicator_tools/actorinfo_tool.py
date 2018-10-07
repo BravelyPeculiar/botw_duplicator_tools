@@ -90,6 +90,29 @@ def actorinfo_duplicate(actorinfo_data, from_entry_name, to_entry_name):
     actorinfo_data = actorinfo_add(actorinfo_data, to_entry_data)
     return actorinfo_data
 
+def actorinfo_edit(actorinfo_data, entry_name, variable_name, new_value):
+    if new_value.startswith("!u"):
+        try: new_value = byml.UInt(int(new_value[3:]))
+        except: pass
+    else:
+        try: new_value = byml.Int(int(new_value))
+        except: pass
+    
+    try:
+        entry_data = [entry for entry in actorinfo_data["Actors"] if entry["name"] == entry_name][0]
+    except IndexError:
+        print("'" + from_entry_name + "' is not in the ActorInfo file.")
+        return False
+    try:
+        entry_data[variable_name]
+    except IndexError:
+        print("'" + from_entry_name + "' is not a variable in that entry.")
+        return False
+    
+    entry_data[variable_name] = new_value
+    
+    return actorinfo_data
+
 def actorinfo_add(actorinfo_data, new_entry_data):
     actorlist = [actor for actor in actorinfo_data["Actors"]]
     actorlist.append(new_entry_data)
@@ -127,10 +150,16 @@ def main():
     subparser_duplicate.add_argument("entry_to_duplicate", help="The name of the entry you want to duplicate")
     subparser_duplicate.add_argument("new_entry_name", help="The name you want for the new entry")
 
-    subparser_copy_instsize = subparsers.add_parser("copy_instsize", help="Copy the value of a variable from one ActorInfo entry to another")
+    subparser_copy_instsize = subparsers.add_parser("copy_instsize", help="Copy the value of the 'instSize' variable from one ActorInfo entry to another")
     subparser_copy_instsize.set_defaults(subparser="copy_instsize")
     subparser_copy_instsize.add_argument("from_entry_name", help="The name of the entry you want to copy the value from")
     subparser_copy_instsize.add_argument("to_entry_name", help="The name of the entry you want to copy the value to")
+    
+    subparser_edit = subparsers.add_parser("edit", help="Edit value of a variable in an ActorInfo entry")
+    subparser_edit.set_defaults(subparser="edit")
+    subparser_edit.add_argument("entry_name", help="The name of the entry you want to edit")
+    subparser_edit.add_argument("variable_name", help="The name of the variable you want to edit")
+    subparser_edit.add_argument("new_value", help="The new value for the variable")
 
     args = parser.parse_args()
 
@@ -149,6 +178,9 @@ def main():
         actorinfo_save(actorinfo_data, args.actorinfo_file)
     if (args.subparser == "duplicate"):
         actorinfo_data = actorinfo_duplicate(actorinfo_data, args.entry_to_duplicate, args.new_entry_name)
+        actorinfo_save(actorinfo_data, args.actorinfo_file)
+    if (args.subparser == "edit"):
+        actorinfo_data = actorinfo_edit(actorinfo_data, args.entry_name, args.variable_name, args.new_value)
         actorinfo_save(actorinfo_data, args.actorinfo_file)
 
 if __name__ == '__main__':

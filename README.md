@@ -18,6 +18,12 @@ For making new actors.
 
 `actorinfo_tool [-b] ACTORINFO_FILE duplicate ENTRY_TO_DUPLICATE NEW_ENTRY_NAME`
 
+##### Edit variable in entry
+`actorinfo_tool [-b] ACTORINFO_FILE edit ENTRY_NAME VARIABLE_NAME NEW_VALUE`
+
+### actorpack\_tool
+Use `-b` for big-endian (Wii U) files.
+
 ##### Copy `instSize`
 For putting armor models over other armors
 
